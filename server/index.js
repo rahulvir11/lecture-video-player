@@ -5,6 +5,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 import connectDB from "./config/db.js";
+import Progress from "./model/progressSchema.js";
 
 
 // Load environment variables
@@ -23,7 +24,24 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(morgan("dev"));
 app.use(cookieParser());
 
-
+function mergeIntervals(intervals) {
+    if (!intervals.length) return [];
+  
+    intervals.sort((a, b) => a[0] - b[0]);
+    const merged = [intervals[0]];
+  
+    for (let i = 1; i < intervals.length; i++) {
+      const last = merged[merged.length - 1];
+      const current = intervals[i];
+  
+      if (current[0] <= last[1]) {
+        last[1] = Math.max(last[1], current[1]);
+      } else {
+        merged.push(current);
+      }
+    }
+    return merged;
+  }
 app.get('/get-progress', async (req, res) => {
     const { userId, videoId } = req.query;
     const record = await Progress.findOne({ userId, videoId });

@@ -11,7 +11,7 @@ const LectureVideoPlayer = ({ selectedVideo }) => {
   useEffect(() => {
     const fetchProgress = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/video/get-progress', {
+        const { data } = await axios.get('http://localhost:5000/get-progress', {
           params: { userId, videoId: selectedVideo.id },
         });
 
@@ -61,7 +61,7 @@ const LectureVideoPlayer = ({ selectedVideo }) => {
 
   const saveInterval = async (interval, lastPosition) => {
     try {
-      await axios.post('http://localhost:5000/api/video/save-progress', {
+      await axios.post('http://localhost:5000/save-progress', {
         userId,
         videoId: selectedVideo.id,
         interval,
@@ -104,7 +104,7 @@ const LectureVideoPlayer = ({ selectedVideo }) => {
   };
 
   return (
-    <div className="mx-28 m-auto bg-gray-100 min-h-screen p-6">
+    <div className=" mx-28 m-auto bg-gray-100 min-h-screen p-6">
       <div className="w-full lg:w-2/3 mx-auto">
         <h1 className="text-2xl font-semibold mb-4">{selectedVideo.title}</h1>
         <video

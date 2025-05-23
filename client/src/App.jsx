@@ -12,7 +12,10 @@ function App() {
 
   return (
     <div className="flex min-h-screen bg-gray-100">
+      <div className='w-full'>
+
       <LectureVideoPlayer selectedVideo={selectedVideo} />
+      </div>
 
       <div className="w-1/3 p-6 border-l bg-white shadow-md">
         <h2 className="text-xl font-bold mb-4">All Lectures</h2>
