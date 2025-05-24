@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Create a tool that accurately tracks how much of a lecture video a user has really watched. Instead of simply recording whether the video was played to the end, your solution must only count progress when new parts of the video are seen..",
   "main": "index.js",
+ "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js -e js,css,ejs"
@@ -17,6 +18,7 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.10"
   }
 }
