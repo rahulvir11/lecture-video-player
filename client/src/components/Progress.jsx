@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
-const userId = 'rahul123';
-
-const LectureVideoPlayer = ({ selectedVideo }) => {
+const LectureVideoPlayer = ({ selectedVideo,userId }) => {
   const videoRef = useRef(null);
   const [watched, setWatched] = useState([]);
   const [progress, setProgress] = useState(0);
@@ -11,7 +9,7 @@ const LectureVideoPlayer = ({ selectedVideo }) => {
   useEffect(() => {
     const fetchProgress = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/get-progress', {
+        const { data } = await axios.get('https://api.assignment.virrahul.com/get-progress', {
           params: { userId, videoId: selectedVideo.id },
         });
 
@@ -35,7 +33,7 @@ const LectureVideoPlayer = ({ selectedVideo }) => {
       setWatched([]);
       setProgress(0);
     };
-  }, [selectedVideo]);
+  }, [selectedVideo,userId]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -57,11 +55,11 @@ const LectureVideoPlayer = ({ selectedVideo }) => {
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [watched, selectedVideo]);
+  }, [watched, selectedVideo,userId]);
 
   const saveInterval = async (interval, lastPosition) => {
     try {
-      await axios.post('http://localhost:5000/save-progress', {
+      await axios.post('https://api.assignment.virrahul.com/save-progress', {
         userId,
         videoId: selectedVideo.id,
         interval,
